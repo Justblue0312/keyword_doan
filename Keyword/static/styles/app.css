@@ -1,0 +1,44 @@
+.title, .subtitle {
+    text-align: center;
+    line-height:100px;
+}
+
+.image-container {
+  background-image: url("https://besthqwallpapers.com/Uploads/25-5-2020/134543/thumb2-syracuse-orange-american-football-team-emblem-silk-flag-orange-blue-silk-texture.jpg");
+  background-size: cover;
+  position: relative;
+  height: 350px;
+}
+
+.text {
+  background-color: white;
+  color: black;
+  font-size: 9vw;
+  font-weight: bold;
+  margin: 0 auto;
+  padding: 15px;
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: screen;
+}
+
+.input-group {
+  height: fit-content;
+  padding-left: 100px;
+  padding-right: 100px;
+  padding-inline: 16px auto;
+  padding-block-start: 16px;
+}
+
+hr{
+  display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
