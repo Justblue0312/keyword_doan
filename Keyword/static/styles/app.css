@@ -1,3 +1,15 @@
+/*==Reset CSS==*/
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/*==Style cơ bản cho website==*/
+body {
+  font-family: sans-serif;
+  color: #333;
+}
+
 .title, .subtitle {
     text-align: center;
     line-height:100px;
@@ -41,4 +53,98 @@ hr{
     border-top: 1px solid #ccc;
     margin: 1em 0;
     padding: 0;
+}
+
+nav {
+  width: 100vw;
+  height: 80px;
+  background-color: hsl(261, 6%, 21%);
+  display: flex;
+  justify-content: space-around;
+}
+
+.selected {
+  background-color: hsl(155, 74%, 33%);
+}
+
+.nav-link {
+  color: white;
+  width: 20%;
+  text-align: center;
+  cursor: pointer;
+}
+
+.nav-link:hover {
+  background-color: hsl(155, 29%, 9%);
+}
+
+i {
+    margin-top: 25px;
+}
+
+#btn{
+  padding: 6px;
+  margin: 6px 0;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&display=swap');
+
+html 
+{
+  height:100%;
+}
+
+body
+{
+ /*https://doodad.dev/pattern-generator */ background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='100%25' width='100%25'%3E%3Cdefs%3E%3Cpattern id='doodad' width='229' height='229' viewBox='0 0 40 40' patternUnits='userSpaceOnUse' patternTransform='rotate(272)'%3E%3Crect width='100%25' height='100%25' fill='rgba(237, 242, 247,1)'/%3E%3Cpath d='M0 40a 9.5-9.5 0 0 0 9.5-9.5a 10.5-10.5 0 0 1 10.5-10.5a 9.5-9.5 0 0 0 9.5-9.5a 10.5-10.5 0 0 1 10.5-10.5v1a-9.5 9.5 0 0 0-9.5 9.5a-10.5 10.5 0 0 1-10.5 10.5a-9.5 9.5 0 0 0-9.5 9.5a-10.5 10.5 0 0 1-10.5 10.5zM0 0a 9.5-9.5 0 0 0 9.5-9.5h1a-10.5 10.5 0 0 1-10.5 10.5z' fill='rgba(145, 207, 243,0.41)'/%3E%3Cpath d='M0 0a 10.5 10.5 0 0 1 10.5 10.5a 9.5 9.5 0 0 0 9.5 9.5a 10.5 10.5 0 0 1 10.5 10.5a 9.5 9.5 0 0 0 9.5 9.5a 10.5 10.5 0 0 1 10.5 10.5a 9.5 9.5 0 0 1 9.5 9.5v1a-10.5-10.5 0 0 1-10.5-10.5a-9.5-9.5 0 0 0-9.5-9.5a-10.5-10.5 0 0 1-10.5-10.5a-9.5-9.5 0 0 0-9.5-9.5a-10.5-10.5 0 0 1-10.5-10.5a-9.5-9.5 0 0 0-9.5-9.5a-10.5-10.5 0 0 1-10.5-10.5a-9.5-9.5 0 0 1-9.5-9.5a-10.5-10.5 0 0 0-10.5-10.5h1a 9.5 9.5 0 0 1 9.5 9.5a 9.5 9.5 0 0 0 9.5 9.5zM-40 0a 10.5 10.5 0 0 1 10.5 10.5a 9.5 9.5 0 0 0 9.5 9.5a 10.5 10.5 0 0 1 10.5 10.5a 9.5 9.5 0 0 0 9.5 9.5a 10.5 10.5 0 0 1 10.5 10.5a 9.5 9.5 0 0 1 9.5 9.5v1a-10.5-10.5 0 0 1-10.5-10.5a-9.5-9.5 0 0 0-9.5-9.5a-10.5-10.5 0 0 1-10.5-10.5a-9.5-9.5 0 0 0-9.5-9.5a-10.5-10.5 0 0 1-10.5-10.5a-9.5-9.5 0 0 0-9.5-9.5a-10.5-10.5 0 0 1-10.5-10.5h1a 9.5 9.5 0 0 0 9.5 9.5zM40 0a 10.5 10.5 0 0 1 10.5 10.5h-1a-9.5-9.5 0 0 1-9.5-9.5a-10.5-10.5 0 0 1-10.5-10.5a-9.5-9.5 0 0 1-9.5-9.5a-10.5-10.5 0 0 1-10.5-10.5z' fill='rgba(143, 208, 255,0.14)'/%3E%3C/pattern%3E%3C/defs%3E%3Crect fill='url(%23doodad)' height='200%25' width='200%25'/%3E%3C/svg%3E ")
+}
+
+@media(min-width:768px)
+{
+ .carousel-caption {
+      left: 50%;
+    top: 55%;
+    transform: translate(-50%, -50%);
+} 
+}
+
+.ombre-externe {
+    background-color: white;
+    padding: 1rem;
+    -moz-box-shadow: 20px 20px 36px rgba(0,0,0,0.2);
+    -webkit-box-shadow: 20px 20px 36px rgba(0,0,0,0.2);
+    box-shadow: 20px 20px 36px rgba(0,0,0,0.2);
+}
+
+.ombre-interne {
+    padding: 5vw;
+    background-color: white;
+    -webkit-box-shadow: inset 8px 0px 14px -1px rgba(0,0,0,0.4);
+    -moz-box-shadow: inset 8px 0px 14px -1px rgba(0,0,0,0.4);
+    box-shadow: inset 8px 0px 14px -1px rgba(0,0,0,0.4);
+}
+
+
+h5
+{
+  font-size:4vw;
+  font-family: 'Caveat', cursive;
+  text-shadow: 0px 0px 8px rgba(0, 2, 0, 1);
+}
+
+p
+{
+text-shadow: -2px -2px 21px rgba(0, 2, 0, 1);
+}
+
+.card-title{
+  text-align: center;
+  margin: 16px;
+}
+
+.card-btn{
+  margin: 16px;
+  width: fit-content;
+  padding: 8 px;
+  display: contents;
 }

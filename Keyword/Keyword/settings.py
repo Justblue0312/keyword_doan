@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-rhgbv5j!*#aw&b_52k3pe9ithtl=rz5jqhxyrx=egdt9ofa*#=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -39,7 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'ggtrends.apps.GgtrendsConfig'
+    'ggtrends.apps.GgtrendsConfig',
+    'facebook.apps.FacebookConfig',
+    'twitter.apps.TwitterConfig',
+    'youtube.apps.YoutubeConfig',
+
+    'rest_framework',
+
 ]
 
 MIDDLEWARE = [

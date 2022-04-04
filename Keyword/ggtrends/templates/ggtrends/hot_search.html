@@ -3,51 +3,106 @@
 {% block content %}
 
 <div class="image-container">
-  <div class="text">
-    <span>Google Trending</span>
-  </div>
+  <h1 class="text">
+    Google Trending
+  </h1>
 </div>
-
-<h1 class="title" style="padding-top:16px;">Search</h1>
-<div class="input-group">
-  <input 
-    action="{% url 'index' %}"
-    type="search" 
-    class="form-control rounded" 
-    aria-label="Search" 
-    aria-describedby="search-addon" 
-    placeholder="Search..."
-    name="search_query"
-    value="{{search_query}}"/>
-  <button type="button" class="btn btn-outline-primary" style="margin-inline-start:16px;">
-      <span class="icon">
-        <i class="fas fa-search"></i>
-      </span>
-    <span>search</button>
-</div>
-
 
 <section class="section is-medium">
-  <h1 class="title">Trending</h1>
-  <h2 class="subtitle">Google search results in the last 24 hours</h2>         
+  <h1 class="title">Today Top Search</h1>
+  <h1 class="title">Google Search Results Today In Vietnam</h1>      
+  
   <table class="table table-dark table-striped">
     <thead>
       <tr>
         <th>STT</th>
         <th>Trends Name</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+    {% if today_trend %}  
+        {% for i in today_trend %}
+        <tr>
+            <td><a>{{i.index}}</a></td>
+            <td><a>{{i.exploreLink}}</a></td>
+            <td><a href="https://www.google.com/search?q='{{i.exploreLink}}'">Follow link to see more...</a></td>
+        </tr>
+        {% endfor %}
+    {% endif %}
+    </tbody>
+  </table>
+</section>
+
+<section class="section is-medium">
+  <h1 class="title">Trending</h1>
+  <h1 class="title">Google search results in the last 24 hours</h1>      
+  
+  <table class="table table-dark table-striped">
+    <thead>
+      <tr>
+        <th>STT</th>
+        <th>Trends Name</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
     {% if trend_data %}  
         {% for i in trend_data %}
         <tr>
-            <td>{{i.index}}</td>
-            <td>{{i.0}}</td>
+            <td><a>{{i.index}}</a></td>
+            <td><a>{{i.0}}</a></td>
+            <td><a href="https://www.google.com/search?q='{{i.0}}'">Follow link to see more...</a></td>
         </tr>
         {% endfor %}
     {% endif %}
     </tbody>
   </table>
+</section>
+
+{% if fy_trend %}
+  <section class="section is-medium">
+    <h1 class="title">The Last 5 year Trending</h1>
+    {% for year in fy_trend %}
+      {% for key, value in year.items %}
+        <h1 class="title">Trends Year : {{key}}</h1>
+          <table class="table table-dark table-striped">
+            <thead>
+              <tr>
+                <th>STT</th>
+                <th>Trends Name</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for trend in value %}
+                <tr>
+                    <td>{{trend.index}}</td>
+                    <td>{{trend.title}}</td>
+                    <td><a href="https://www.google.com/search?q='{{trend.title}}'">Follow link to see more...</a></td>
+                </tr>
+                {% endfor %}
+            
+            </tbody>
+          </table>
+      {% endfor %}
+      </br>
+  {% endfor %}
+  </section>
+{% endif %}
+
+<section class="section is-medium">
+
+    {% for i, j in cate_trend.items %}
+        <br />
+        <br />
+        <h1 class="title"><strong>{{i}}</strong></h1>
+        <br />
+        {% for key, value in j.items %}
+            <a href="https://www.google.com/search?q='{{value}}'"><button id="btn" class="btn btn--main btn--sm">{{value}}</button></a>
+        {% endfor %}
+    {% endfor %}
+    
 </section>
 
 

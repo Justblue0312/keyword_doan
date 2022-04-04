@@ -1,0 +1,45 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<section class="section is-medium">
+    {% for trend in vn_trends %}
+    {{ trend.link }}
+    </br>
+    {{ trend.trend_name }}
+    </br>
+{% endfor %}
+</section>
+
+<section class="section is-medium">
+    {% for trend in ww_trends %}
+    {{ trend.link }}
+    </br>
+    {{ trend.trend_name }}
+    </br>
+{% endfor %}
+</section>
+
+
+<section class="section is-medium">
+    {% for trend in top_trends %}
+    {{ trend.link }}
+    </br>
+    {{ trend.trend_name }}
+    </br>
+{% endfor %}
+</section>
+
+<section class="section is-medium">
+    {% for trend in longest_trend %}
+    {{ trend.link }}
+    </br>
+    {{ trend.trend_name }}
+    </br>
+{% endfor %}
+</section>
+
+{% endblock content %}'
+
+
+

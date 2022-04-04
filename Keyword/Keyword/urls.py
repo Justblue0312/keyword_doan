@@ -19,4 +19,8 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('ggtrends.urls')),
+    path('', include('facebook.urls')),
+    path('', include('twitter.urls')),
+    path('', include('youtube.urls')),
+    path('api/', include('api.urls')),
 ]

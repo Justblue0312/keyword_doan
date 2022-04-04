@@ -1,0 +1,47 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+    <div class="image-container">
+        <h1 class="text">
+            H O M E
+        </h1>
+    </div>
+    
+    {% if todaytrend %}
+        <section class="section is-medium">
+            <h1 style="text-align: center; margin:16px;">Today Trending</h1>
+            {% for trend in todaytrend %}
+                <a href="https://www.google.com/search?q='{{trend}}"><button class="btn btn--main btn--sm" style="margin:16px;">{{trend}}</button></a>
+            {% endfor %}
+        </section>
+        
+    {% endif %}
+
+    </br>
+
+    {% if trendpost %}
+        
+        <section class="section is-medium">
+            <h1 style="text-align: center;">Trending Posts</h1>
+            <div class="wrapper">
+                {% for trend in trendpost %}
+                    <div class="wrapper">
+                        <div class="card" style="margin:16px;">
+                            <h3 class="card-title">Trends: {{trend.trend_name}}</h3>
+                            <h4 class="card-title" style="margin-left:16px; font-size:16px; ">Title: {{trend.title}}</h4>
+                                <p class="card-content">Content: {{trend.body}}</p>
+                                <a href="{{trend.link}}"><button class="card-btn"> See more...</button></a>
+                            </div> 
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+        
+    {% endif %}
+    
+    
+{% endblock content %}
+
+
+
