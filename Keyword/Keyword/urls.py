@@ -22,5 +22,6 @@ urlpatterns = [
     path('', include('facebook.urls')),
     path('', include('twitter.urls')),
     path('', include('youtube.urls')),
+    path('', include('vnexpress.urls')),
     path('api/', include('api.urls')),
 ]

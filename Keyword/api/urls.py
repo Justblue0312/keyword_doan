@@ -29,4 +29,7 @@ urlpatterns = [
 
     path('longest_trends/', views.getLongestTrends),
     path('longest_trends/<str:pk>/', views.getLongestTrend),
+
+    path('news_posts/', views.getNewsPosts),
+    path('news_posts/<str:pk>/', views.getNewsPost),
 ]

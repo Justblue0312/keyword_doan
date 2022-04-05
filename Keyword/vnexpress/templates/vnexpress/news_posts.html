@@ -1,0 +1,14 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+{% for post in news_posts %}
+    <section class="section is-medium">
+        <h1 class="subtitle">{{post.title}}</h1>
+        <h1 class="subtitle">{{post.author}}</h1>
+        <h1 class="subtitle">{{post.content}}</h1>
+        <h1 class="subtitle">{{post.image}}</h1>
+    </section>
+{% endfor %}
+
+{% endblock content %}

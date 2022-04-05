@@ -5,10 +5,11 @@ from .utils import trendSearchData, todayTrendData
 from .serializers import (TrendKeywordSerializer, TrendSearchSerializer, YearTrendSerializer,
                           TodayTrendsSerializer, TrendPostsSerializer, FbPostSerializer,
                           VietNamTwitterTrendSerializer, WorldwideTwitterTrendSerializer,
-                          TopHashtagTrendSerializer, LongestTrendSerializer)
+                          TopHashtagTrendSerializer, LongestTrendSerializer, NewsPostSerializer)
 
 from facebook.models import Post
 from twitter.models import LongestTrend, TopHashtagTrend, VietNamTwitterTrend, WorldwideTwitterTrend
+from vnexpress.models import NewsPost
 
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -44,8 +45,25 @@ def getRoutes(request):
 
         {'GET': '/api/longest_trends/'},
         {'GET': '/api/longest_trends/<str:pk>/'},
+
+        {'GET': '/api/news_posts/'},
+        {'GET': '/api/news_posts/<str:pk>/'},
     ]
     return Response(routes)
+
+
+@api_view(['GET'])
+def getNewsPosts(request):
+    trends = NewsPost.objects.all()
+    serializer = NewsPostSerializer(trends, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getNewsPost(request, pk):
+    trends = NewsPost.objects.get(id=pk)
+    serializer = NewsPostSerializer(trends, many=False)
+    return Response(serializer.data)
 
 
 @api_view(['GET'])

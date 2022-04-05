@@ -2,6 +2,13 @@ from rest_framework import serializers
 from ggtrends.models import YearTrend, TodayTrends, TrendPosts
 from facebook.models import Post
 from twitter.models import LongestTrend, TopHashtagTrend, VietNamTwitterTrend, WorldwideTwitterTrend
+from vnexpress.models import NewsPost
+
+
+class NewsPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = NewsPost
+        fields = '__all__'
 
 
 class LongestTrendSerializer(serializers.ModelSerializer):

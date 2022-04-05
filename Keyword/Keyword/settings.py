@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'facebook.apps.FacebookConfig',
     'twitter.apps.TwitterConfig',
     'youtube.apps.YoutubeConfig',
+    'vnexpress.apps.VnexpressConfig',
 
     'rest_framework',
 
