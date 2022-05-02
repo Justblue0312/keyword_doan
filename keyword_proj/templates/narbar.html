@@ -1,0 +1,70 @@
+{% load static %}
+
+
+<header class="short-header">
+
+    <div class="gradient-block"></div>
+
+    <div class="row header-content">
+
+        <div class="logo">
+            <a href="{% url 'home' %}">Author</a>
+        </div>
+
+        <nav id="main-nav-wrap">
+            <ul class="main-navigation sf-menu">
+                <li class="current"><a href="{% url 'home' %}" title="">Home</a></li>
+                <li class="has-children">
+                    <a href="category.html" title="">Categories</a>
+                    <ul class="sub-menu">
+                        <li><a href="{% url 'trends_home' %}">Trend News</a></li>
+                        <li><a href="{% url 'trend_index' %}">Google Trends</a></li>
+                        <li><a href="{% url 'facebook' %}">Facebook</a></li>
+                        <li><a href="{% url 'twitter' %}">Twitter</a></li>
+                        <li><a href="{% url 'youtube' %}">Youtube</a></li>
+                        <li><a href="{% url 'others' %}">Others</a></li>
+                    </ul>
+                </li>
+                <li class="has-children">
+                    <a href="single-standard.html" title="">Blog</a>
+                    <ul class="sub-menu">
+                        <li><a href="single-video.html">Video Post</a></li>
+                        <li><a href="single-audio.html">Audio Post</a></li>
+                        <li><a href="single-gallery.html">Gallery Post</a></li>
+                        <li><a href="single-standard.html">Standard Post</a></li>
+                    </ul>
+                </li>
+                <li><a href="style-guide.html" title="">Styles</a></li>
+                <li><a href="about.html" title="">About</a></li>
+                <li><a href="contact.html" title="">Contact</a></li>
+            </ul>
+        </nav> <!-- end main-nav-wrap -->
+
+        <div class="search-wrap">
+
+            <form role="search" method="POST" class="search-form" action="{% url 'search' %}">
+                {% csrf_token %}
+                <label>
+                    <span class="hide-content">Search for:</span>
+                    {% comment %}
+                    <input type="search" class="search-field" placeholder="Type Your Keywords" value=""
+                        name="search_query" id="search_query" title="Search for:" autocomplete="off">
+                    {% endcomment %}
+                    <input class="search-field" value="" type="search" placeholder="Search" aria-label="Search"
+                        aria-label="Search" name="search_query" id="search_query">
+                </label>
+                <input type="submit" class="search-submit" value="Search">
+            </form>
+
+            <a href="#" id="close-search" class="close-btn">Close</a>
+
+        </div> <!-- end search wrap -->
+
+        <div class="triggers">
+            <a class="search-trigger" href="#"><i class="fa fa-search"></i></a>
+            <a class="menu-toggle" href="#"><span>Menu</span></a>
+        </div> <!-- end triggers -->
+
+    </div>
+
+</header>
