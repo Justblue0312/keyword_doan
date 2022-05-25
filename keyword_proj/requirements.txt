@@ -4,7 +4,6 @@ Django==3.2.6
 djangorestframework==3.13.1
 django-ckeditor==6.4.0
 facebook-crawler==0.0.28
-# facebook-page-scraper==0.1.8
 google-searching==0.8
 goose3==3.1.11
 matplotlib==3.5.1

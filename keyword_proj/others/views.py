@@ -55,7 +55,7 @@ def handle_rake_alg(request):
 
             context = {
                 'form': form,
-                'text1': text
+                'text1': text[:5]
             }
             return render(request, 'others/result.html', context)
         elif 'tokenize' in request.POST:

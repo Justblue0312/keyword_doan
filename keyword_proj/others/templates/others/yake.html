@@ -7,7 +7,7 @@ YAKE
 {% block content %}
 
 <div style="align-content: center;margin: 16px;text-align: center;font-size: 2em;font-family: fantasy;">YAKE Algorithm</div>
-<textarea cols="100" rows="20" id="test-input" style="margin: 16px;text-align: center;display: block;margin-left: auto;margin-right: auto;"></textarea>
+<textarea cols="100" rows="20" id="test-input" style="margin: 16px; text-align: center; display: block;margin-left: auto; margin-right: auto; padding:16px;"></textarea>
 <div class="wrapper">
     <style>
         .wrapper {
@@ -19,13 +19,19 @@ YAKE
             top: 50%;
         }
     </style>
-    <button id="submit-button" type="submit" pys-onClick="my_function">Extract</button>
+    <button id="submit-button" type="submit" pys-onClick="my_function" style="background-color: darkgrey; padding-left: 16px; padding-right: 16px;">Extract</button>
 </div>
-<div id="test-output"></div>
+<div id="test-output" style="margin:16px; text-align:center;"></div>
 
 <py-script>
 from js import console
 import yake
+
+def createitem(text, id):
+    header4 = document.createElement("h4")
+    header4.id = id
+    header4.innerText = text
+    document.body.append(header4)
 
 def get_keyword_yake(text):
     stopwords = ['a', ' a lô', 'a ha', 'ai', 'ai ai', 'ai nấy', 'ai đó', 'alô', 'amen', 'anh', 'anh ấy', 'ba',
@@ -207,7 +213,10 @@ def my_function(*args, **kwargs):
     #print('text:', text)
     console.log(f'text: {text}')
 
-    Element('test-output').element.innerText = get_keyword_yake(text)
+    keywords = get_keyword_yake(text)
+
+    Element('test-output').element.innerText = get_keyword_yake(text)[:5]
+    #[createitem(x[0], i) for i, x in enumerate(keywords[:5])]
 
 </py-script>
 
