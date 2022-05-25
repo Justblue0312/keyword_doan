@@ -1,0 +1,5 @@
+#start service
+celery -A keyword_proj beat -l info
+
+#start task
+celery -A keyword_proj worker -l info

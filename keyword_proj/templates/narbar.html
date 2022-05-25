@@ -13,30 +13,21 @@
 
         <nav id="main-nav-wrap">
             <ul class="main-navigation sf-menu">
-                <li class="current"><a href="{% url 'home' %}" title="">Home</a></li>
+                <li><a href="{% url 'home' %}" title="">Home</a></li>
+                <li><a href="{% url 'trends_home' %}" title="">Trend News</a></li>
+                <li><a href="{% url 'trend_index' %}" title="">Google Trends</a></li>
+                <li><a href="{% url 'facebook' %}" title="">Facebook</a></li>
+                <li><a href="{% url 'twitter' %}" title="">Twitter</a></li>
+                <li><a href="{% url 'youtube' %}" title="">Youtube</a></li>
                 <li class="has-children">
-                    <a href="category.html" title="">Categories</a>
+                    <a href="single-standard.html" title="">Tool</a>
                     <ul class="sub-menu">
-                        <li><a href="{% url 'trends_home' %}">Trend News</a></li>
-                        <li><a href="{% url 'trend_index' %}">Google Trends</a></li>
-                        <li><a href="{% url 'facebook' %}">Facebook</a></li>
-                        <li><a href="{% url 'twitter' %}">Twitter</a></li>
-                        <li><a href="{% url 'youtube' %}">Youtube</a></li>
-                        <li><a href="{% url 'others' %}">Others</a></li>
+                        <li><a href="{% url 'yake' %}">Yake</a></li>
+                        <li><a href="{% url 'rake' %}">Rake & Underthesea</a></li>
                     </ul>
                 </li>
-                <li class="has-children">
-                    <a href="single-standard.html" title="">Blog</a>
-                    <ul class="sub-menu">
-                        <li><a href="single-video.html">Video Post</a></li>
-                        <li><a href="single-audio.html">Audio Post</a></li>
-                        <li><a href="single-gallery.html">Gallery Post</a></li>
-                        <li><a href="single-standard.html">Standard Post</a></li>
-                    </ul>
-                </li>
-                <li><a href="style-guide.html" title="">Styles</a></li>
-                <li><a href="about.html" title="">About</a></li>
-                <li><a href="contact.html" title="">Contact</a></li>
+                <li><a href="{% url 'about' %}" title="">About</a></li>
+                <li><a href="{% url 'contact' %}" title="">Contact</a></li>
             </ul>
         </nav> <!-- end main-nav-wrap -->
 
@@ -46,10 +37,6 @@
                 {% csrf_token %}
                 <label>
                     <span class="hide-content">Search for:</span>
-                    {% comment %}
-                    <input type="search" class="search-field" placeholder="Type Your Keywords" value=""
-                        name="search_query" id="search_query" title="Search for:" autocomplete="off">
-                    {% endcomment %}
                     <input class="search-field" value="" type="search" placeholder="Search" aria-label="Search"
                         aria-label="Search" name="search_query" id="search_query">
                 </label>

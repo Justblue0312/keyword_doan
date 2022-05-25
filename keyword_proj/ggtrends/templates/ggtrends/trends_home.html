@@ -12,32 +12,33 @@
         <h1 style="text-align: center; margin:16px;">Today Trending</h1>
         {% for trend in todaytrends %}
         <a href="https://www.google.com/search?q='{{trend}}'"><button class="btn btn-primary btn-sm"
-                style="margin:16px; border-radius: 16px; background-color: #add8e6;">{{trend}}</button></a>
+                style="margin:16px; border-radius: 16px; background-color: #add8e6; padding:revert;">{{trend}}</button></a>
         {% endfor %}
     </section>
     {% endif %}
 
     </br>
 
-    {% if trendposts %}
-
-    <section class="section is-medium">
-        <h1 style="text-align: center; margin:16px;">Trending Posts</h1>
-        <div class="posts">
-            {% for trend in trendposts %}
-            <div class="row narrow add-bottom text-center" style="border: 5px solid #add8e6;border-radius: 16px;">
-                <div class="col-twelve tab-full">
-                    <h3 style="margin-top: 6px;">Trend: {{trend.trend_name}}</h3>
-                    <h4>Title: {{trend.title}}</h4>
-                    <p style="font-size: 16px;">{{trend.body}}</p>
-                    <a href="{{trend.link}}" style="font-size: 12px;">See more...</a>
-                </div>
+    <section id="page-header">
+        <div class="row current-cat">
+            <div class="col-full">
+                <h1>Category: Google Trends</h1>
             </div>
-            {% endfor %}
         </div>
     </section>
 
-
+    {% if trendposts %}
+    {% for trend in trendposts %}
+    <div class="post" style="margin:32px; border-bottom: 5px solid; padding: 60px;">
+        <h3>{{trend.created}}</h3>
+        <h1>{{trend.title}}</h1>
+        <h4><span>Trend :</span> {{trend.trend_name}} </h4>
+        <p class="quote" style="border-left: 5px solid lightgrey; padding-left: 5px;">
+            {{trend.body}}
+        </p>
+        <a href="{{trend.link}}">Read more...</a>
+    </div>
+    {% endfor %}
     {% endif %}
 
 </div>

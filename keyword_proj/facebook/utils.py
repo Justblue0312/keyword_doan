@@ -1,7 +1,7 @@
 from facebook_page_scraper import Facebook_scraper
 import ast
-from keyword_proj.const import STOPWORD_LIST
-import yake
+import facebook_crawler
+from datetime import date
 
 
 def getFbPostList(request, page_name, count=5, browser="chrome"):
@@ -26,13 +26,34 @@ def getFbPostList(request, page_name, count=5, browser="chrome"):
     return fb_posts
 
 
-def getKeyword(request, text):
-    stopwords = STOPWORD_LIST
-    kw_extractor = yake.KeywordExtractor(lan='vi', n=2, stopwords=stopwords)
-    keywords = kw_extractor.extract_keywords(text)
-
-    kw_list = list()
-    for kw in keywords:
-        kw_list.append(kw)
-
-    return kw_list
+def get_post_from_facebook_url(request, url):
+    until_date = date.today().strftime("%Y-%m-%d")
+    data_in_csv = facebook_crawler.Crawl_PagePosts(
+        pageurl=url, until_date=str(until_date))
+    data_in_dict = data_in_csv.to_dict('records')
+    fb_posts = list()
+    for post in data_in_dict:
+        post_dict = {
+            'name': post['NAME'],
+            'shares': post['SHARE_COUNT'],
+            'reaction_count': post['REACTION_COUNT'],
+            'comments': post['COMMENT_COUNT'],
+            'content': post['MESSAGE'],
+            'posted_on': post['TIME'],
+            'updated_on': post['UPDATETIME'],
+            'video': '',
+            'image': '',
+            'post_url': 'https://www.facebook.com/' + post['POSTID'],
+            'likes': post['LIKE'],
+            'loves': post['LOVE'],
+            'wow': post['WOW'],
+            'sad': post['SAD'],
+            'angry': post['ANGRY'],
+            'haha': post['HAHA'],
+            'cares': post['CARE'],
+            'post_id': post['POSTID'],
+            'page_id': post['PAGEID'],
+            'cursor': post['CURSOR']
+        }
+        fb_posts.append(post_dict)
+    return fb_posts

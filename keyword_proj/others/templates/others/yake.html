@@ -1,7 +1,34 @@
-# TODO: Notes
+{% extends 'main.html' %}
 
-available_flag = False
-STOPWORD_LIST = ['a', ' a lô', 'a ha', 'ai', 'ai ai', 'ai nấy', 'ai đó', 'alô', 'amen', 'anh', 'anh ấy', 'ba',
+{% block title %}
+YAKE
+{% endblock title %}
+
+{% block content %}
+
+<div style="align-content: center;margin: 16px;text-align: center;font-size: 2em;font-family: fantasy;">YAKE Algorithm</div>
+<textarea cols="100" rows="20" id="test-input" style="margin: 16px;text-align: center;display: block;margin-left: auto;margin-right: auto;"></textarea>
+<div class="wrapper">
+    <style>
+        .wrapper {
+            text-align: center;
+        }
+
+        .button {
+            position: absolute;
+            top: 50%;
+        }
+    </style>
+    <button id="submit-button" type="submit" pys-onClick="my_function">Extract</button>
+</div>
+<div id="test-output"></div>
+
+<py-script>
+from js import console
+import yake
+
+def get_keyword_yake(text):
+    stopwords = ['a', ' a lô', 'a ha', 'ai', 'ai ai', 'ai nấy', 'ai đó', 'alô', 'amen', 'anh', 'anh ấy', 'ba',
                  'ba ba', 'ba bản', 'ba cùng', 'ba họ', 'ba ngày', 'ba ngôi', 'ba tăng', 'bao giờ', 'bao lâu', 'bao nhiêu',
                  'bao nả', 'bay biến', 'biết', 'biết bao', 'biết bao nhiêu', 'biết chắc', 'biết chừng nào', 'biết mình',
                  'biết mấy', 'biết thế', 'biết trước', 'biết việc', 'biết đâu', 'biết đâu chừng', 'biết đâu đấy', 'biết được',
@@ -162,12 +189,26 @@ STOPWORD_LIST = ['a', ' a lô', 'a ha', 'ai', 'ai ai', 'ai nấy', 'ai đó', 'a
                  'ạ', 'ạ ơi', 'ấy', 'ấy là', 'ầu ơ', 'ắt', 'ắt hẳn', 'ắt là', 'ắt phải', 'ắt thật', 'ối dào', 'ối giời', 'ối giời ơi', 'ồ', 'ồ ồ', 'ổng', 'ớ',
                  'ớ này', 'ờ', 'ờ ờ', 'ở', 'ở lại', 'ở như', 'ở nhờ', 'ở năm', 'ở trên', 'ở vào', 'ở đây', 'ở đó', 'ở được', 'ủa', 'ứ hự', 'ứ ừ', 'ừ', 'ừ nhé',
                  'ừ thì', 'ừ ào', 'ừ ừ', 'ử']
+    kw_extractor = yake.KeywordExtractor(lan='vi', n=2, stopwords=stopwords)
+    keywords = kw_extractor.extract_keywords(text)
 
-# TODO:MSN News
-MSN_URL = 'https://assets.msn.com/service/news/feed/pages/ntp?User=m-28DB9AB8270C673B241E8BBF266A6640&activityId=BACCB1F0-CC7E-4698-990E-C0C998053E81&apikey=0QfOX3Vn51YCzitbLaRkTTBadtWpgTN8NZLW0C1SEM&audienceMode=enterprise&contentType=article,video,slideshow,webcontent&fdhead=msnallexpusers,muidflt10cf,muidflt15cf,muidflt299cf,pneedge2cf,platagyedge2cf,audexedge1cf,bingcollabedge1cf,pnehp3cf,starthp1cf,prg-shop-staginc,prg-views-stagc,artgly2cf,article1cf,msnapp1cf,anaheim1cf,msnapp2cf,vebudumu04302020,msnsports3cf,msnsports4cf,weather3cf,weather5cf,prg-hp-greyfeed,prg-1sw-acp-crepro,prg-1sw-gevte,csmoney5cf,msnsapphire2cf,1s-remotecompact,prg-adspeek,1s-br30min,1s-winauthservice,1s-winsegservice,prg-1sw-grevtt,wf-sunny-first,prg-newsinte-staginc,btie-freqcap-t,1s-pagesegservice,prg-ias,prg-1sw-ms-cloud,prg-1sw-mscloudn,prg-ms-cloud,routentpring2t,prg-1sw-newsskipc,1s-fcrypt,prg-1sw-splog,artglyrank2cf,prg-ctr-pnpc,prg-1sw-accu10,prg-1sw-pr2fuzal,prg-1sw-pr2sdfuz,prg-1sw-pr2sdfze,prg-1sw-rndw,prg-1sw-hdukr,prg-sh-cadp2,prg-sh-synadpc,prg-upsaip-w1-t,prg-wtch-rmu6,prg-1sw-sp5mats,prg-1sw-psfy21,prg-wea-skipauth,prg-1sw-acrlt,prg-1sw-acmng,prg-no-ctrlwh,prg-favor-exp,prg-upsaip-r-t,prg-1sw-alerticonac,prg-wpo-rentint2,prg-wpo-tsclpinf&infopaneCount=17&market=vi-vn&newsSkip=0&newsTop=48&ocid=anaheim-ntp-feeds&query=default&queryType=myfeed&timeOut=1000'
-MSN_URL_2 = 'https://api.msn.com/news/feed/pages/ntp?market=vi-vn&activityId=BACCB1F0-CC7E-4698-990E-C0C998053E81&timeOut=1000&ocid=anaheim-ntp-feeds&fdhead=1s-br30min%2c1s-fcrypt%2c1s-pagesegservice%2c1s-remotecompact%2c1s-winauthservice%2c1s-winsegservice%2cbtie-freqcap-t%2cprg-1sw-accu10%2cprg-1sw-acmng%2cprg-1sw-acp-crepro%2cprg-1sw-acrlt%2cprg-1sw-alerticonac%2cprg-1sw-gevte%2cprg-1sw-grevtt%2cprg-1sw-hdukr%2cprg-1sw-ms-cloud%2cprg-1sw-mscloudn%2cprg-1sw-newsskipc%2cprg-1sw-pr2fuzal%2cprg-1sw-pr2sdfuz%2cprg-1sw-pr2sdfze%2cprg-1sw-psfy21%2cprg-1sw-rndw%2cprg-1sw-sp5mats%2cprg-1sw-splog%2cprg-adspeek%2cprg-ctr-pnpc%2cprg-favor-exp%2cprg-hp-greyfeed%2cprg-ias%2cprg-ms-cloud%2cprg-newsinte-staginc%2cprg-no-ctrlwh%2cprg-sh-cadp2%2cprg-shop-staginc%2cprg-sh-synadpc%2cprg-upsaip-r-t%2cprg-upsaip-w1-t%2cprg-views-stagc%2cprg-wea-skipauth%2cprg-wpo-rentint2%2cprg-wpo-tsclpinf%2cprg-wtch-rmu6&apikey=0QfOX3Vn51YCzitbLaRkTTBadtWpgTN8NZLW0C1SEM&contentType=article%2cvideo%2cslideshow%2cwebcontent&User=m-28DB9AB8270C673B241E8BBF266A6640&$skip=1&wpoCmsAdServed=2&wpoNativeAdServed=1&cardsServed=30&newsSkip=47'
+    kw_list = list()
+    for kw in keywords:
+        kw_list.append(kw)
 
-# TODO: Facebook URL
-BEATVN_URL = 'https://www.facebook.com/beatvn.network/'
-THEANH28_URL = 'https://www.facebook.com/Theanh28.Hanoi'
-VNEX_URL = 'https://www.facebook.com/congdongvnexpress'
+    return kw_list
+
+def my_function(*args, **kwargs):
+    console.log(f'args: {args}')
+    console.log(f'kwargs: {kwargs}')
+
+    text = Element('test-input').element.value
+
+    #print('text:', text)
+    console.log(f'text: {text}')
+
+    Element('test-output').element.innerText = get_keyword_yake(text)
+
+</py-script>
+
+{% endblock content %}

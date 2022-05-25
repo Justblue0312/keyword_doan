@@ -4,6 +4,11 @@ import json
 from goose3 import Goose
 import dateutil.parser
 
+from keyword_proj.const import STOPWORD_LIST
+import yake
+from rake_nltk import Rake
+from underthesea import word_tokenize, classify
+
 
 def get_news_posts(url):
     payload = {}
@@ -72,3 +77,34 @@ def convert_datetime(datetime_string):
         return convert
     else:
         return None
+
+
+def get_keyword_yake(request, text):
+    stopwords = STOPWORD_LIST
+    kw_extractor = yake.KeywordExtractor(lan='vi', n=2, stopwords=stopwords)
+    keywords = kw_extractor.extract_keywords(text)
+
+    kw_list = list()
+    for kw in keywords:
+        kw_list.append(kw)
+
+    return kw_list
+
+
+def get_keyword_rake(request, text):
+    stopwords = STOPWORD_LIST
+    punctuations = ".,;:?!()'\""
+    r = Rake(stopwords, punctuations)
+    r.extract_keywords_from_text(text)
+    keywords = r.get_ranked_phrases_with_scores()
+    keyword_str = str(keywords[0][1]).strip().split('-')
+
+    return keyword_str, keywords
+
+
+def get_word_tokenize(request, text):
+    return word_tokenize(text, format='text')
+
+
+def get_classify(request, text):
+    return str(classify(text)[0])

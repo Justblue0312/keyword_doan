@@ -1,15 +1,15 @@
-from ast import While
-from django.shortcuts import render
-from keyword_proj.const import MSN_URL, available_flag
-from .utils import get_msn_content_from_url, get_msn_url_from_body_html, get_news_posts, convert_datetime
-from .models import SliceNews, ArticleNews
+from django.shortcuts import redirect, render
+from keyword_proj.const import MSN_URL
+from .utils import get_keyword_rake, get_msn_content_from_url, get_msn_url_from_body_html, get_news_posts, convert_datetime
+from .models import SliceNews, ArticleNews, Comment
+from others.models import Keyword
+from .forms import CommentForm
+from django.contrib import messages
 
 
 def home(request):
-
     next_page_url, articles, weathers, slices = get_news_posts(MSN_URL)
 
-    # SliceNews.objects.all().delete()
     for slice in slices:
         publish_date = slice['publishedDateTime']
         for item in slice['slides']:
@@ -34,7 +34,6 @@ def home(request):
         else:
             lastSeenId = row.title
 
-    # ArticleNews.objects.all().delete()
     for article in articles:
         article_obj, _ = ArticleNews.objects.get_or_create(
             title=article['title'])
@@ -62,13 +61,52 @@ def home(request):
             lastSeenId = row.title
 
     slice_object = SliceNews.objects.order_by('publish_date')[:10]
-    article_object = ArticleNews.objects.order_by('publish_date')[:10]
+    article_object = ArticleNews.objects.order_by('publish_date')[:20]
 
     context = {'slices': slice_object, 'articles': article_object}
     return render(request, 'news/home.html', context)
 
 
 def getArticleNews(request, pk):
+    # TODO: Get spectific article
     artist_obj = ArticleNews.objects.get(id=pk)
-    context = {'article': artist_obj}
+
+    # TODO: Use rake to extract keyword.
+    lastSeenId = str('inf')
+    slice_rows = Keyword.objects.all().order_by('keyword')
+    for row in slice_rows:
+        if row.keyword == lastSeenId:
+            row.delete()
+        else:
+            lastSeenId = row.keyword
+
+    paragraph = artist_obj.content
+    keywords, _ = get_keyword_rake(request, paragraph)
+    for keyword in keywords:
+        data = {
+            'keyword': keyword,
+            'source': artist_obj.url
+        }
+        keyword_obj = Keyword(**data)
+        keyword_obj.save()
+
+    # TODO: Handle a review form
+    form = CommentForm()
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = artist_obj
+            comment.active = True
+            comment.save()
+            print(comment)
+            messages.success(
+                request, 'Your comment was successfully submitted!')
+            return redirect('article', pk=artist_obj.id)
+
+    comment_obj = Comment.objects.filter(post=artist_obj)
+    comment_length = len(comment_obj)
+
+    context = {'article': artist_obj, 'keywords': keywords,
+               'comments': comment_obj, 'len': comment_length, 'form': form}
     return render(request, 'news/single_article_news.html', context)
