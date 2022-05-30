@@ -1,5 +1,4 @@
 # TODO: Notes
-
 available_flag = False
 STOPWORD_LIST = ['a', ' a lô', 'a ha', 'ai', 'ai ai', 'ai nấy', 'ai đó', 'alô', 'amen', 'anh', 'anh ấy', 'ba',
                  'ba ba', 'ba bản', 'ba cùng', 'ba họ', 'ba ngày', 'ba ngôi', 'ba tăng', 'bao giờ', 'bao lâu', 'bao nhiêu',
@@ -171,3 +170,5 @@ MSN_URL_2 = 'https://api.msn.com/news/feed/pages/ntp?market=vi-vn&activityId=BAC
 BEATVN_URL = 'https://www.facebook.com/beatvn.network/'
 THEANH28_URL = 'https://www.facebook.com/Theanh28.Hanoi'
 VNEX_URL = 'https://www.facebook.com/congdongvnexpress'
+
+FACEBOOK = 'https://www.facebook.com/'

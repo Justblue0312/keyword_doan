@@ -2,6 +2,7 @@ from facebook_page_scraper import Facebook_scraper
 import ast
 import facebook_crawler
 from datetime import date
+from keyword_proj.const import FACEBOOK
 
 
 def getFbPostList(request, page_name, count=5, browser="chrome"):
@@ -43,7 +44,7 @@ def get_post_from_facebook_url(request, url):
             'updated_on': post['UPDATETIME'],
             'video': '',
             'image': '',
-            'post_url': 'https://www.facebook.com/' + post['POSTID'],
+            'post_url': FACEBOOK + post['POSTID'],
             'likes': post['LIKE'],
             'loves': post['LOVE'],
             'wow': post['WOW'],
