@@ -1,6 +1,7 @@
 import json
 from pytrends.request import TrendReq
 import urllib.parse
+from google_searching import ggl
 
 pytrend = TrendReq()
 
@@ -116,3 +117,35 @@ def trendCategories(request):
         cate_dict[title] = sub_cate
 
     return cate_dict
+
+
+def get_trend_search():
+    titles_list = []
+    trendpost = []
+    trending_df = pytrend.trending_searches(pn='vietnam')
+    trend_table = trending_df.reset_index().to_json(orient='records')
+    trend_data = []
+    trend_data = json.loads(trend_table)
+
+    for item in trend_data:
+        item['index'] = item['index'] + 1
+        item['name'] = item['0']
+        del item['0']
+
+    for item in trend_data:
+        title = item.get('name')
+        titles_list.append(title)
+
+    for title in titles_list:
+        r = ggl(title, lang='vi', max_results=5)
+        for item in r:
+            trend_dict = {
+                'trend_name': title,
+                'title': item.get('title').replace('...', ''),
+                'link': item.get('href'),
+                'body': item.get('body')
+            }
+
+            trendpost.append(trend_dict)
+
+    return trendpost

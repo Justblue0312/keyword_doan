@@ -7,7 +7,7 @@ import pandas as pd
 import json
 import datetime
 from google_searching import ggl
-from .models import YearTrend, TodayTrends, TrendPosts
+from .models import YearTrend, TodayTrends, TrendPosts, TrendHotPosts
 from pytrends.request import TrendReq
 
 pytrends = TrendReq()
@@ -83,3 +83,28 @@ def search(request):
     else:
         context = {}
         return render(request, 'ggtrends/search.html', context)
+
+
+def get_trendpost_by_trend(request, trendname):
+    trendpost_obj = TrendPosts.objects.filter(
+        trend_name=TodayTrends.objects.get(trend_name=trendname))
+    context = {
+        'trendpost': trendpost_obj
+    }
+    return render(
+        request,
+        'ggtrends/trendposts.html',
+        context
+    )
+
+
+def get_hotpost(request, trendname):
+    trendpost_obj = TrendHotPosts.objects.filter(trend_name=trendname)
+    context = {
+        'trendpost': trendpost_obj
+    }
+    return render(
+        request,
+        'ggtrends/trendposts.html',
+        context
+    )

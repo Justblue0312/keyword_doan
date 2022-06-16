@@ -32,11 +32,16 @@ Google Trending
                             <tr>
                                 <td><a>{{i.index}}</a></td>
                                 <td><a>{{i.exploreLink}}</a></td>
-                                <td><a href="https://www.google.com/search?q='{{i.exploreLink}}'"
+                                {% comment %} <td><a href="https://www.google.com/search?q='{{i.exploreLink}}'"
+                                        style="font-size: 12px;text-decoration: underline;">Follow link to see
+                                        more...</a>
+                                </td> {% endcomment %}
+                                <td><a href="{% url 'trendpost' i.exploreLink %}"
                                         style="font-size: 12px;text-decoration: underline;">Follow link to see
                                         more...</a>
                                 </td>
                             </tr>
+                            {{i.id}}
                             {% endfor %}
                             {% endif %}
                         </tbody>
@@ -70,7 +75,11 @@ Google Trending
                             <tr>
                                 <td><a>{{i.index}}</a></td>
                                 <td><a>{{i.0}}</a></td>
-                                <td><a href="https://www.google.com/search?q='{{i.0}}'"
+                                {% comment %} <td><a href="https://www.google.com/search?q='{{i.0}}'"
+                                        style="font-size: 12px;text-decoration: underline;">Follow link to see
+                                        more...</a>
+                                </td> {% endcomment %}
+                                <td><a href="{% url 'hotpost' i.0 %}"
                                         style="font-size: 12px;text-decoration: underline;">Follow link to see
                                         more...</a>
                                 </td>

@@ -35,3 +35,16 @@ class TrendPosts(models.Model):
 
     def __str__(self):
         return self.link
+
+
+class TrendHotPosts(models.Model):
+    id = models.UUIDField(default=uuid.uuid4, unique=True,
+                          primary_key=True, editable=False)
+    trend_name = models.CharField(max_length=100, null=True, blank=True)
+    title = models.CharField(max_length=255, null=True, blank=True)
+    link = models.URLField(max_length=255, null=True, blank=True)
+    body = models.CharField(max_length=50000, null=True, blank=True)
+    created = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+
+    def __str__(self):
+        return self.link

@@ -1,0 +1,78 @@
+{% extends 'main.html' %}
+
+{% block title %}
+Trend Post
+{% endblock title %}
+
+{% block content %}
+
+{% if trendpost %}
+
+<section id="page-header">
+    <div class="row current-cat">
+        <div class="col-full">
+            <h1 id="trend_name"></h1>
+        </div>
+    </div>
+</section>
+
+<section id="bricks">
+    <div class="row masonry">
+        <!-- brick-wrapper -->
+        <div class="bricks-wrapper">
+            <div class="grid-sizer"></div>
+            {% for post in trendpost %}
+            <article class="brick entry format-standard animate-this">
+                <div class="entry-text">
+                    <div class="entry-header">
+
+                        <div class="entry-meta">
+                            <span class="cat-links">
+                                <p style="text-align: center;"><a>{{post.title}}</a></p>
+                                <p>{{post.created|capfirst}}</p>
+                            </span>
+                        </div>
+
+                        <h1 class="entry-title"></h1> 
+
+                    </div>
+                    <div class="entry-excerpt">
+                        {{post.body}}
+                    </div>
+                    <br>
+                    <div class="entry-excerpt">
+                        <a href="{{post.link}}">Follow the link...</a>
+                    </div>
+                    
+
+                </div>
+
+            </article> <!-- end article -->
+
+            {% endfor %}
+            {% endif %}
+
+        </div>
+        <!-- end brick-wrapper -->
+    </div>
+    <!-- end row -->
+</section>
+<!-- end bricks -->
+
+<script>
+    url = window.location.href
+
+    var trendname = url.split('/')
+
+    trend_raw = trendname[4]
+    trend = decodeURIComponent(trend_raw)
+
+    // console.log(trend)
+    document.getElementById('trend_name').innerHTML = 'Trend : ' + trend
+</script>
+
+
+{% endblock content %}
+
+
+

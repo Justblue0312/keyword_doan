@@ -49,11 +49,12 @@ INSTALLED_APPS = [
     'others.apps.OthersConfig',
 
     'rest_framework',
+    'django_celery_beat',
 ]
 
-CELERY_BROKER_URL = 'redis://localhost:6379'
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379/0'
 
-DEFAULT_FROM_EMAIL = 'will@learndjango.com'
+DEFAULT_FROM_EMAIL = 'trao0312@gmail.com'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 MIDDLEWARE = [
