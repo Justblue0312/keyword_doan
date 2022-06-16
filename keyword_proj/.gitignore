@@ -3,3 +3,6 @@ __pycache__
 /migrations
 __init__
 env
+/staticfiles
+/command.txt
+dump.rdb
