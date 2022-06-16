@@ -4,5 +4,7 @@ __pycache__
 __init__
 env
 /staticfiles
-/command.txt
-dump.rdb
+celerybeat-schedule.bak
+celerybeat-schedule.dat
+celerybeat-schedule.dir
+db.sqlite3.sql
