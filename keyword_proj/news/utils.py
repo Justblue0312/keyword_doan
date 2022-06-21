@@ -108,3 +108,19 @@ def get_word_tokenize(request, text):
 
 def get_classify(request, text):
     return str(classify(text)[0])
+
+
+def get_top_n_from_list_for_yake(n, arr):
+    result = list()
+    for item in arr:
+        result.append(item[0])
+
+    return result[0:n]
+
+
+def get_top_n_from_list_for_rake(n, arr):
+    result = list()
+    for item in arr:
+        result.append(item[1])
+
+    return result[0:n]

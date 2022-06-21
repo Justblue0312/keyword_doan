@@ -106,6 +106,19 @@ DATABASES = {
 
 # DATABASES = {
 #     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         "OPTIONS": {
+#             'init_command': "SET sql_mode='STRICT_TRANS_TABLES', innodb_strict_mode=1",
+#             "charset": "utf8mb4",
+#             # 'timeout': 20,
+#             'read_default_file': './my.cnf',
+#         },
+#     }
+# }
+
+
+# DATABASES = {
+#     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
 #         'NAME': 'keyword_0312',
 #         'USER': 'postgres',

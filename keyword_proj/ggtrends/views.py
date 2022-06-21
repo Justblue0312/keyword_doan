@@ -1,14 +1,16 @@
 from django.shortcuts import render
-from .utils import (trendSearch, todayTrend,
-                    getTheLastFiveYearsTrend,
-                    trendCategories, getTheLastFiveYearsTrendDict,
-                    todayTrendList)
+
+from others.models import Keyword
+from news.models import ArticleNews
+from facebook.models import Post
+from .utils import *
 import pandas as pd
 import json
 import datetime
 from google_searching import ggl
 from .models import YearTrend, TodayTrends, TrendPosts, TrendHotPosts
 from pytrends.request import TrendReq
+from django.db.models import Q
 
 pytrends = TrendReq()
 
@@ -78,7 +80,29 @@ def search(request):
         for item in suggestions:
             item['index'] = item['index'] + 1
 
-        context = {'search_query': search_query, 'suggestions': suggestions}
+        keyword_obj = Keyword.objects.filter(
+            Q(keyword__startswith=search_query) |
+            Q(keyword__icontains=search_query)
+        )
+
+        keyword = [i for i in keyword_obj]
+        # print(keyword)
+
+        posts = Post.objects.filter(
+            Q(content__icontains=search_query)
+        )
+
+        news = ArticleNews.objects.filter(
+            Q(title__icontains=search_query) |
+            Q(abstract__icontains=search_query) |
+            Q(content__icontains=search_query)
+        )
+
+        context = {'search_query': search_query,
+                   'suggestions': suggestions,
+                   'keyword': keyword,
+                   'posts': posts,
+                   'news': news}
         return render(request, 'ggtrends/search.html', context)
     else:
         context = {}

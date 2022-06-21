@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 from keyword_proj.const import MSN_URL
-from .utils import get_keyword_rake, get_msn_content_from_url, get_msn_url_from_body_html, get_news_posts, convert_datetime
+from .utils import *
 from .models import SliceNews, ArticleNews, Comment
 from others.models import Keyword
 from .forms import CommentForm
@@ -71,7 +71,19 @@ def getArticleNews(request, pk):
     # TODO: Get spectific article
     artist_obj = ArticleNews.objects.get(id=pk)
 
-    # TODO: Use rake to extract keyword.
+    # TODO: Use yake to extract keyword.
+    paragraph = artist_obj.content
+    keywords = get_keyword_yake(request, paragraph)
+    kw = get_top_n_from_list_for_yake(5, keywords)
+
+    for keyword in keywords:
+        data = {
+            'keyword': keyword[0],
+            'source': artist_obj.url
+        }
+        keyword_obj = Keyword(**data)
+        keyword_obj.save()
+
     lastSeenId = str('inf')
     slice_rows = Keyword.objects.all().order_by('keyword')
     for row in slice_rows:
@@ -79,16 +91,6 @@ def getArticleNews(request, pk):
             row.delete()
         else:
             lastSeenId = row.keyword
-
-    paragraph = artist_obj.content
-    keywords, _ = get_keyword_rake(request, paragraph)
-    for keyword in keywords:
-        data = {
-            'keyword': keyword,
-            'source': artist_obj.url
-        }
-        keyword_obj = Keyword(**data)
-        keyword_obj.save()
 
     # TODO: Handle a review form
     form = CommentForm()
@@ -107,6 +109,6 @@ def getArticleNews(request, pk):
     comment_obj = Comment.objects.filter(post=artist_obj)
     comment_length = len(comment_obj)
 
-    context = {'article': artist_obj, 'keywords': keywords,
+    context = {'article': artist_obj, 'keywords': kw,
                'comments': comment_obj, 'len': comment_length, 'form': form}
     return render(request, 'news/single_article_news.html', context)

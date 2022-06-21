@@ -41,6 +41,30 @@
         </div>
     </div> <!-- end row -->
 </section>
+
+<section>
+    {% if keyword %}
+        {{keyword.keyword}}
+        {{keyword.source}}
+    {% endif %}
+</section>
+
+<section>
+    {% if posts %}
+        {% for post in posts %}
+            {{post}}
+        {% endfor %}
+    {% endif %}
+</section>
+
+<section>
+    {% if news %}
+        {% for new in news %}
+            {{new}}
+        {% endfor %}
+    {% endif %}
+</section>
+
 {% endif %}
 
 {% endblock content %}

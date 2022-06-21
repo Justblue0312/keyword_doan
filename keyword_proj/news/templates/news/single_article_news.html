@@ -23,6 +23,15 @@
 
                 <div class="primary-content">
                     <h1 class="entry-title">{{article.title}}</h1>
+                    {% if keywords %}
+                    <p class="tags">
+                        <span>Keywords :</span>
+                        {% for keyword in keywords %}
+                        <a>{{keyword}}</a>
+                        {% endfor %}
+
+                    </p>
+                    {% endif %}
                     <ul class="entry-meta">
                         <li class="date">{{article.publish_date}}</li>
                         <li class="cat"><a>{{article.source|capfirst}}</a><a
@@ -33,15 +42,6 @@
                     <p class="lead">{{article.abstract}}.</p>
                     <p>{{article.content|safe|linebreaks}}</p>
 
-                    {% if keywords %}
-                    <p class="tags">
-                        <span>Tagged in :</span>
-                        {% for keyword in keywords %}
-                        <a>{{keyword}}</a>
-                        {% endfor %}
-
-                    </p>
-                    {% endif %}
 
                 </div> <!-- end entry-primary -->
 

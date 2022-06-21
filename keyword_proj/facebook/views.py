@@ -4,7 +4,7 @@ from django.contrib import messages
 from keyword_proj.const import BEATVN_URL, THEANH28_URL, VNEX_URL
 from .models import Post
 from others.models import Keyword
-from news.utils import get_keyword_rake
+from news.utils import *
 from news.forms import CommentForm
 from news.models import Comment
 from .utils import get_post_from_facebook_url
@@ -29,6 +29,17 @@ def getPosts(request):
     posts = Post.objects.order_by('posted_on')[:10]
 
     post_kw = list()
+    # for post in posts:
+    #     _, keywords = get_keyword_rake(request, post.content)
+    #     keyword_list = list()
+    #     for keyword in keywords:
+    #         keyword_list.append(keyword[1])
+    #         data = {
+    #             'keyword': keyword[1],
+    #             'source': post.post_url
+    #         }
+    #         keyword_obj = Keyword(**data)
+    #         keyword_obj.save()
 
     context = {'posts': posts, 'keywords': post_kw}
 
