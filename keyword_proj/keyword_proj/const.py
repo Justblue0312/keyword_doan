@@ -172,3 +172,7 @@ THEANH28_URL = 'https://www.facebook.com/Theanh28.Hanoi'
 VNEX_URL = 'https://www.facebook.com/congdongvnexpress'
 
 FACEBOOK = 'https://www.facebook.com/'
+
+#TODO: GGT
+GGT_API_1 = "https://trends.google.com.vn/trends/api/topdailytrends?hl=vi&tz=-420&geo=VN"
+GGT_API_2 = "https://trends.google.com.vn/trends/api/dailytrends?hl=vi&tz=-420&geo=VN&ns=15"

@@ -1,7 +1,10 @@
 import json
 from pytrends.request import TrendReq
 import urllib.parse
+import requests
 from google_searching import ggl
+import re
+from keyword_proj.const import GGT_API_1, GGT_API_2
 
 pytrend = TrendReq()
 
@@ -149,3 +152,70 @@ def get_trend_search():
             trendpost.append(trend_dict)
 
     return trendpost
+
+
+def remove_tags(text):
+    TAG_RE = re.compile(r'<[^>]+>')
+    return TAG_RE.sub('', text)
+
+
+def get_ggt_data_from_api():
+    url = GGT_API_1
+    payload = {}
+    headers = {
+        'Cookie': 'NID=511=Aea-tt-tudrnRfSJZcPkQ2r157nErI7PkmNc_NpHqy-PUksT2N6lOlInuv5_TBwTl-YMuVP7FiCPXqWangEoYSO3MALwZWpFKfL-FIqtiB76XWv6k0nbLJlyzFr3-n_nF-xvUlZL3JMmxptb2OSSHjeMDd1nxyyRI4p18g_snq0'
+    }
+
+    response = requests.request("GET", url, headers=headers, data=payload)
+
+    json_data = (response.text).replace(")]}',", '')
+    data = json.loads(json_data)
+    results = list()
+    for item in data['default']['trendingSearches']:
+        data_dict = {
+            'title': item['title'],
+            'views': item['formattedTraffic'],
+            'url': 'https://trends.google.com' + item['trendingSearchUrl'],
+            'country': item['country'],
+        }
+        results.append(data_dict)
+    return results
+
+
+def get_ggt_full_data_from_api():
+    url = GGT_API_2
+    payload = {}
+    headers = {
+        'Cookie': 'NID=511=Aea-tt-tudrnRfSJZcPkQ2r157nErI7PkmNc_NpHqy-PUksT2N6lOlInuv5_TBwTl-YMuVP7FiCPXqWangEoYSO3MALwZWpFKfL-FIqtiB76XWv6k0nbLJlyzFr3-n_nF-xvUlZL3JMmxptb2OSSHjeMDd1nxyyRI4p18g_snq0'
+    }
+
+    response = requests.request("GET", url, headers=headers, data=payload)
+    json_data = (response.text).replace(")]}',", '')
+    data = json.loads(json_data)
+    results = list()
+    for item in data['default']['trendingSearchesDays']:
+        group_dict = dict()
+        group_dict[item['formattedDate']] = item['trendingSearches']
+        results.append(group_dict)
+
+    return results
+
+
+def get_related_keywords(text):
+    url = f"https://www.google.com/complete/search?q={text}&cp=0&client=gws-wiz&xssi=t&hl=en-VN&authuser=0&psi=ArB8YpD_G7XNmAXFq4j4AQ.1652338691992&pq=14000000 byte = gb&ofp=null&nolsbt=1&dpr=1.25"
+
+    payload = {}
+    headers = {}
+
+    response = requests.request("GET", url, headers=headers, data=payload)
+    json_data = (response.text).replace(")]}'", '')
+    data = json.loads(json_data)
+    # print(data)
+    results = list()
+    for item in data[0]:
+        for i in item:
+            i = remove_tags(i)
+            results.append(i)
+            break
+
+    return results
