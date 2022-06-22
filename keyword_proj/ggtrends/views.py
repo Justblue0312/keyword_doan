@@ -80,14 +80,6 @@ def search(request):
         for item in suggestions:
             item['index'] = item['index'] + 1
 
-        keyword_obj = Keyword.objects.filter(
-            Q(keyword__startswith=search_query) |
-            Q(keyword__icontains=search_query)
-        )
-
-        keyword = [i for i in keyword_obj]
-        # print(keyword)
-
         posts = Post.objects.filter(
             Q(content__icontains=search_query)
         )
@@ -98,11 +90,13 @@ def search(request):
             Q(content__icontains=search_query)
         )
 
+        related_words = get_related_keywords(search_query)
+
         context = {'search_query': search_query,
                    'suggestions': suggestions,
-                   'keyword': keyword,
                    'posts': posts,
-                   'news': news}
+                   'articles': news[0:3],
+                   'relates': related_words}
         return render(request, 'ggtrends/search.html', context)
     else:
         context = {}

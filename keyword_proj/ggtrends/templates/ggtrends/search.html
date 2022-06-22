@@ -42,29 +42,99 @@
     </div> <!-- end row -->
 </section>
 
-<section>
-    {% if keyword %}
-        {{keyword.keyword}}
-        {{keyword.source}}
-    {% endif %}
+{% if posts %}
+<section id="page-header">
+    <div class="row current-cat">
+        <div class="col-full">
+            <h1>Related Facebook posts</h1>
+        </div>
+    </div>
 </section>
 
-<section>
-    {% if posts %}
-        {% for post in posts %}
-            {{post}}
-        {% endfor %}
-    {% endif %}
-</section>
 
-<section>
-    {% if news %}
-        {% for new in news %}
-            {{new}}
-        {% endfor %}
-    {% endif %}
-</section>
+<section id="bricks">
+    <div class="row masonry">
+        <!-- brick-wrapper -->
+        <div class="bricks-wrapper">
+            <div class="grid-sizer"></div>
+            {% for post in posts %}
+            <article class="brick entry format-standard animate-this">
+                <div class="entry-text">
+                    <div class="entry-header">
 
+                        <div class="entry-meta">
+                            <span class="cat-links">
+                                <a>{{post.name}}</a>
+                                <a>{{post.posted_on|capfirst}}</a>
+                            </span>
+                        </div>
+
+                        <h1 class="entry-title"><a href="{% url 'post' post.id %}">{{post.content|slice:"50"}}...</a>
+                        </h1>
+
+                    </div>
+                    <div class="entry-excerpt">
+                        {{post.content|slice:"120"}}
+                    </div>
+                </div>
+
+            </article> <!-- end article -->
+            {% endfor %}
+            {% endif %}
+
+        </div>
+        <!-- end brick-wrapper -->
+    </div>
+    <!-- end row -->
+</section>
 {% endif %}
+
+<section id="page-header">
+    {% if articles %}
+    {% for article in articles %}
+    <article class="brick entry format-standard animate-this">
+
+        <div class="entry-thumb">
+            <a href="{% url 'article' article.id %}" class="thumb-link">
+            <img src="{{article.image_url}}" alt="building">
+            </a>
+        </div>
+
+        <div class="entry-text">
+            <div class="entry-header">
+
+            <div class="entry-meta">
+                <span class="cat-links">
+                <a>{{article.attribution}}</a>
+                <a>{{article.source|capfirst}}</a>
+                </span>
+            </div>
+
+            <h1 class="entry-title"><a href="{% url 'article' article.id %}">{{article.title}}</a></h1>
+
+            </div>
+            <div class="entry-excerpt">
+            {{article.abstract}}
+            </div>
+        </div>
+
+    </article> <!-- end article -->
+    <br><br><br>
+    {% endfor %}
+    {% endif %}
+</section>
+
+<section id="bricks">
+    <div class="row half-bottom">
+        <div class="col-twelve">
+            <h3>Related keywords</h3>
+            <ul class="stats-tabs">
+                {% for relate in relates %}
+                <li><a href="https://www.google.com/search?q='{{relate}}'"><em>{{relate}}</em></a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div> <!-- end row -->
+</section> 
 
 {% endblock content %}

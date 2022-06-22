@@ -1,9 +1,10 @@
 import json
 from pytrends.request import TrendReq
-import urllib.parse
+import html
 import requests
 from google_searching import ggl
 import re
+from urllib.parse import unquote
 from keyword_proj.const import GGT_API_1, GGT_API_2
 
 pytrend = TrendReq()
@@ -214,7 +215,7 @@ def get_related_keywords(text):
     results = list()
     for item in data[0]:
         for i in item:
-            i = remove_tags(i)
+            i = html.unescape(remove_tags(i))
             results.append(i)
             break
 
